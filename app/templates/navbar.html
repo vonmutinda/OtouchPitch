@@ -10,18 +10,18 @@
           <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">marriage</a>
+          <a class="nav-link" href="#"> <i  ></i>rry me</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">greetings</a>
+          <a class="nav-link" href="#">Openers</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">about You</a>
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">
-        <button type="button" class="btn btn-primary my-2 my-sm-0">Sign up</button>
-        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Log in</button>
+        <button type="button" class="btn btn-primary my-2 my-sm-0"><a href="{{url_for('auth.register')}}">Sign up</a></button>
+        <button class="btn btn-secondary my-2 my-sm-0" type="submit"><a href="{{url_for('auth.login')}}">Log in</a></button>
       </form>
     </div>
   </nav>
