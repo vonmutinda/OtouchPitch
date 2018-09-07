@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
-
+{% import 'macros.html' as macro %}
 {% block body %}
-<div class="container">
+<div class="container-fluid">
 
     <!-- marriage pitches -->
     <div class="row">
@@ -10,9 +10,18 @@
     <hr>
     <!-- greeting pitches -->
     <div class="row">
-
-        <p>I wana marry the crap out of you !</p>
-
+        <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action active">
+                proposal
+            </a>
+            <a href="#" class="list-group-item list-group-item-action">
+                i think you and i have a lot in common than we don't . 
+            </a>
+            <a href="#" class="list-group-item list-group-item-action disabled">
+                Like <span class="badge badge-primary badge-pill">14</span>
+                Dislike<span class="badge badge-primary badge-pill">14</span>
+            </a>
+        </div>
     </div>
 
     <hr>
