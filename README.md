@@ -1,6 +1,4 @@
-# [minute-pitch](https://minuteone.herokuapp.com/)
-
-## About OtouchPitch 
+# About OtouchPitch 
 It's a web app that allows user to share incredible lines of pitches for various categories that anyone could use in just one minute to make a difference .
 
 ## Description & User Specifications
@@ -32,18 +30,21 @@ Install [Python](https://www.python.org/downloads/)
 
 ### Create a Virtual Environment
 Run the following commands in the same terminal:
-`sudo apt-get install python3.6-venv`
-`python3.6 -m venv --without-pip virtual`
-`curl https://bootstrap.pypa.io/get-pip.py | python`
-`source virtual/bin/activate`
+```sudo apt-get install python3.6-venv```
+```python3.6 -m venv --without-pip virtual```
+```curl https://bootstrap.pypa.io/get-pip.py | python```
+```source virtual/bin/activate```
 
 ### Database
 Quickly create a database where your data is going to be persistent .
-`psql`
-`you=#  CREATE DATABASE pitches;`
+```
+psql
+you=#  CREATE DATABASE pitches;
+```
+
 ```bash
-export DATABASE_URL='postgresql+psycopg2://username:password@localhost/pitchit'
-export SECRET_KEY='Your secret key'
+SQLALCHEMY_DATABASE_URI='postgresql+psycopg2://username:password@localhost/otouch'
+SECRET_KEY='Your secret key'
 ```
 
 ### Run Database Migrations
@@ -69,6 +70,3 @@ Open your browser on `http://localhost:5000/`, `http://127.0.0.1:5000`
 
 ## Support and contact details
 Contact me [von MUTINDA](maxwellmutinda@outlook.com) for any comments, reviews or insights .
-
-### License
-Copyright (c) [von MUTINDA](LICENSE)

@@ -1,3 +1,3 @@
-|     BEHAVIOUR                   |         INPUT             |          OUTPUT        |
+|     BEHAVIOUR                   |         INPUT             |          OUTPUT       |
 |---------------------------------|---------------------------|------------------------| 
-| Sign in                | 
+| Sign in               | 
