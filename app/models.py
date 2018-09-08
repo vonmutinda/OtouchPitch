@@ -48,6 +48,7 @@ class Pitches(db.Model):
     category_id = db.Column(db.Integer , db.ForeignKey("categories.id"))
 
     users = db.relationship('User',backref = 'pitch',lazy="dynamic")
+    reactions = db.relationship('Reactions',backref = 'reaction',lazy = "dynamic")
 
     def save_pitch(self):
         db.session.add(self)
@@ -66,3 +67,13 @@ class Category(db.Model):
 
     id = db.Column (db.Integer , primary_key = True)
     category = db.Column (db.String)
+
+
+class Reactions (db.Model):
+
+    __tablename__ = 'reactions'
+
+    id = db.Column(db.Integer , primary_key=True)
+    likes = db.Column(db.Integer)
+    dislikes = db.Column (db.Integer)
+    pitch_id =  db.Column(db.Integer,db.ForeignKey("pitches.id"))
