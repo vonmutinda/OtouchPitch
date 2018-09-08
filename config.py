@@ -11,8 +11,8 @@ class Config():
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
-class ProdConfig():
-    pass
+class ProdConfig(Config):
+    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
 
 class DevConfig():
     DEBUG = True
