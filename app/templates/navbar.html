@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="#">oneTouch</a>
+    <a class="navbar-brand" href="#"> <i class="fa fa-spinner"></i> neTouch</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -7,21 +7,28 @@
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="#">Home  <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#"> <i  ></i>rry me</a>
+          <a class="nav-link" href="#"> <i class="fa fa-maxcdn"></i>arry me</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Openers</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">about You</a>
+          <a class="nav-link" href="#"> <i class="fa fa-buysellads"></i> bout You</a>
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">
-        <button type="button" class="btn btn-primary my-2 my-sm-0"><a href="{{url_for('auth.register')}}">Sign up</a></button>
-        <button class="btn btn-secondary my-2 my-sm-0" type="submit"><a href="{{url_for('auth.login')}}">Log in</a></button>
+        {% if current_user.is_authenticated %}
+                
+          <li style="color:white;padding:15px;">
+             logged in as <span class="badge badge-pill badge-light">{{current_user.username}}</span> <i class="fa fa-user-circle">
+          </li>
+        {% else %}  
+          <button type="button" class="btn btn-primary my-2 my-sm-0"><a href="{{url_for('auth.register')}}">Sign up <i class="fa fa-user-plus"></i></a></button>
+          <button class="btn btn-secondary my-2 my-sm-0" type="submit"><a href="{{url_for('auth.login')}}">Log <i class="fa fa-linkedin-square"></i></a></button>
+        {% endif %}
       </form>
     </div>
   </nav>
