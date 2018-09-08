@@ -35,13 +35,11 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 
-class Pitches(db.Model):
-
+class Pitch(db.Model):
     __tablename__ = 'pitches'
 
     id = db.Column(db.Integer,primary_key = True)
     pitch_id = db.Column(db.Integer)
-    movie_title = db.Column(db.String)
     pitch = db.Column(db.String)
     posted = db.Column(db.DateTime,default=datetime.utcnow)
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
@@ -56,7 +54,7 @@ class Pitches(db.Model):
 
     @classmethod
     def get_pitches(cls,id):
-        pitches = Pitches.query.filter_by(pitch_id = id).all()
+        pitches = Pitch.query.filter_by(pitch_id = id).all()
 
         return pitches
 
