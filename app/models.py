@@ -15,6 +15,8 @@ class User(UserMixin , db.Model):
     bio = db.Column(db.String(255))
     profile_pic_path = db.Column(db.String())
 
+    pitches = db.relationship('Pitch',backref = 'user',lazy="dynamic")
+
     def __repr__(self):
         return f'User {self.username}'
 
@@ -39,13 +41,11 @@ class Pitch(db.Model):
     __tablename__ = 'pitches'
 
     id = db.Column(db.Integer,primary_key = True)
-    pitch_id = db.Column(db.Integer)
     pitch = db.Column(db.String)
     posted = db.Column(db.DateTime,default=datetime.utcnow)
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
     category_id = db.Column(db.Integer , db.ForeignKey("categories.id"))
-
-    users = db.relationship('User',backref = 'pitch',lazy="dynamic")
+  
     reactions = db.relationship('Reactions',backref = 'reaction',lazy = "dynamic")
 
     def save_pitch(self):
@@ -64,7 +64,11 @@ class Category(db.Model):
     __tablename__ = 'categories'
 
     id = db.Column (db.Integer , primary_key = True)
-    category = db.Column (db.String)
+    cat = db.Column (db.String)
+
+    def save_cat(self):
+    db.session.add(self)
+    db.session.commit()
 
 
 class Reactions (db.Model):

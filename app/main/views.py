@@ -3,7 +3,7 @@ from . import main
 
 from flask_login import login_required , current_user
 from .forms import PitchForm 
-from ..models import Pitch
+from ..models import Pitch , Category
 
 '''
 This routing function fires moment the app loads. 
@@ -15,7 +15,7 @@ def index():
     openers = Pitch.get_pitches('openers')
     about = Pitch.get_pitches('about')
 
-    return render_template('index.html')
+    return render_template('index.html',proposal=proposal,openers=openers,about=about)
 
 
 
@@ -44,7 +44,6 @@ def pick_up():
 A route for pitches of how to best describe yourself in only a minute . 
 '''
 @main.route('/pitch/describe-yourself')
-@login_required
 def about_you():
 
 
@@ -63,15 +62,22 @@ def save_pitch():
     form = PitchForm()
 
     if form.validate_on_submit():
-        title = form.title.data
-        review = form.review.data
+        pitch = form.pitch.data
 
-        # new_review = Review(movie.id,title,movie.poster,review)
-        # Updated review instance
         new_pitch = Pitch(pitch_id=pitch.id, pitch = pitch.pitch,  user=current_user)
+        new_category = Category (cat = category)
 
         new_pitch.save_pitch()
-        return redirect(url_for('.movie',id = pitch.id ))
+        new_category.save_cat()
+        return redirect(url_for('.index'))
 
-    title = f'{pitch.category} pitch'
+    # title = f'{pitch.category} pitch'
     return render_template('pitches.html')
+
+
+
+'''
+There also could be a route that receives pitches categories as a parameter then
+
+fires a search method in class Pitches and returns appropriate data from db .
+'''
