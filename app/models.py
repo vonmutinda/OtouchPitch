@@ -67,8 +67,8 @@ class Category(db.Model):
     cat = db.Column (db.String)
 
     def save_cat(self):
-    db.session.add(self)
-    db.session.commit()
+        db.session.add(self)
+        db.session.commit()
 
 
 class Reactions (db.Model):
