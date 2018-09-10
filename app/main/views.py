@@ -11,11 +11,11 @@ This routing function fires moment the app loads.
 @main.route('/')
 def index():
 
-    proposal = Pitch.get_pitches('proposal')
-    openers = Pitch.get_pitches('openers')
-    about = Pitch.get_pitches('about')
+    # proposal = Pitch.get_pitches('proposal')
+    # openers = Pitch.get_pitches('openers')
+    # about = Pitch.get_pitches('about')
 
-    return render_template('index.html',proposal=proposal,openers=openers,about=about)
+    return render_template('index.html')
 
 
 
