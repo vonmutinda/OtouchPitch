@@ -1,9 +1,9 @@
-from flask import render_template , request , redirect , url_for 
+from flask import render_template , request , redirect , url_for , abort
 from . import main 
 
 from flask_login import login_required , current_user
 from .forms import PitchForm 
-from ..models import Pitch , Category
+from ..models import Pitch , Category , User
 
 '''
 This routing function fires moment the app loads. 
@@ -81,3 +81,20 @@ There also could be a route that receives pitches categories as a parameter then
 
 fires a search method in class Pitches and returns appropriate data from db .
 '''
+
+
+
+
+
+'''
+A route to redirect you to a user's profile
+'''
+@main.route('/user/<username>')
+def profile(username):
+    user = User.query.filter_by(username = username).first()
+
+    if user is None:
+        abort(404)
+
+    return render_template("profile/profile.html", user = user)
+
