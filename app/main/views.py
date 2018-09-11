@@ -2,7 +2,7 @@ from flask import render_template , request , redirect , url_for , abort
 from . import main 
 
 from flask_login import login_required , current_user
-from .forms import PitchForm 
+from .forms import PitchForm , UpdateProfile
 from ..models import Pitch , Category , User
 
 '''
@@ -98,3 +98,46 @@ def profile(username):
 
     return render_template("profile/profile.html", user = user)
 
+'''
+A route to take you to edit user's profile 
+'''
+
+@main.route('/user/<username>/update',methods = ["POST"])
+@login_required
+def update_profile(username):
+    user = User.query.filter_by(username = username).first()
+
+    if user is None:
+        abort(404)
+
+    form = UpdateProfile()
+
+    if form.validate_on_submit():
+        user.bio = form.bio.data 
+
+        db.session.add(user)
+        db.session.commit()
+
+        return redirect(url_for('.profile',username=user.username))
+
+    return render_template("profile/update_profile.html", form = form)
+
+'''
+A routing function for uploading profile pictures into our app .
+
+-- i feel good about myself now that i'm using docstrings ..
+'''
+
+@main.route('/profile/<username>/upload/pic',methods =["POST"])
+@login_required
+def profile_pic(username):
+
+    user = User.query.filter_by(username = username).first()
+
+    if 'photos' in request.files:
+        filename = photos.save(request.files['photos'])
+        path = f"photos/{filename}"
+        user.profile_pic_path = path
+        db.session.commit()
+    return redirect(url_for("main.profile",username=username))
+    
