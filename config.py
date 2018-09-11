@@ -1,9 +1,9 @@
 import os
 
 class Config():
-    # SECRET_KEY = os.environ.get('SECRET_KEY')
+    SECRET_KEY = os.environ.get('SECRET_KEY')
     
-    SECRET_KEY = 'bxxfcxa43xf7xd9xc6xefxf8c'
+    # SECRET_KEY = 'bxxfcxa43xf7xd9xc6xefxf8c'
 
     #  email configurations
     MAIL_SERVER = 'smtp.googlemail.com'

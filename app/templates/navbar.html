@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="#"> <i class="fa fa-spinner"></i> ne <i class="fa fa-tumblr"></i>ouch</a>
+    <a class="navbar-brand" href="/"> <i class="fa fa-spinner"></i> ne <i class="fa fa-tumblr"></i>ouch</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -21,13 +21,15 @@
       </ul>
       <form class="form-inline my-2 my-lg-0">
         {% if current_user.is_authenticated %}
-                
-          <li style="color:white;padding:15px;">
-             logged in as <span class="badge badge-pill badge-light">{{current_user.username}}</span> <i class="fa fa-user-circle">
-          </li>
+            
+             logged in as 
+             <!-- <span class="badge badge-pill badge-light">{{current_user.username}}</span> -->
+
+             <button type="button" class="btn btn-outline-success logged "> {{current_user.username}} </button>
+
         {% else %}  
-          <button type="button" class="btn btn-primary my-2 my-sm-0"><a href="{{url_for('auth.register')}}">Sign up <i class="fa fa-user-plus"></i></a></button>
-          <button class="btn btn-secondary my-2 my-sm-0" type="submit"><a href="{{url_for('auth.login')}}">Log <i class="fa fa-linkedin-square"></i></a></button>
+          <a href="{{url_for('auth.register')}}"><span class="badge badge-pill badge-dark">Sign Up <i class="fa fa-user-plus"></i> </span></a>
+          <a href="{{url_for('auth.login')}}"><span class="badge badge-pill badge-success">Log <i class="fa fa-linkedin-square"></i> </span> </a>
         {% endif %}
       </form>
     </div>
