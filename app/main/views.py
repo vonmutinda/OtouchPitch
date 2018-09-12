@@ -3,7 +3,7 @@ from . import main
 
 from flask_login import login_required , current_user
 from .forms import PitchForm , UpdateProfile ,PostForm , CommentForm
-from ..models import Pitch , User
+from ..models import Pitch , User ,Comment
 from .. import db , photos
 
 '''
@@ -17,7 +17,7 @@ def index():
     about = Pitch.query.filter_by(category = 'About You').all()
     form = PostForm()
     if form.validate_on_submit():
-        post = Pitch(body=form.pitch.data, author=current_user, category=form.category.data)
+        post = Pitch(pitch=form.pitch.data, author=current_user, category=form.category.data)
         # db.session.add(post)
         # db.session.commit()
         flash('Your pitch has been posted!')
@@ -162,16 +162,16 @@ def profile_pic(username):
 @main.route('/comments/<int:id>', methods = ['GET','POST'])
 @login_required
 def new_comment(id):
-    comment = Comments.query.filter_by(pitch_id=id).all()
+    comment = Comment.query.filter_by(pitch_id=id).all()
+    user = current_user
 
     form_comment = CommentForm()
     if form_comment.validate_on_submit():
         details = form_comment.details.data
         user = current_user
 
-        new_comment = Comments(details = details,pitch_id=id,user =user)
-        # # save comment
+        new_comment = Comment(details = details,pitch_id=id,user =user)
         db.session.add(new_comment)
         db.session.commit()
 
-    return render_template('pickuplines.html',form_comment = form_comment,comment=comment,uname = user.username)
+    return render_template('comments.html',form_comment = form_comment,comment=comment,uname = user.username)

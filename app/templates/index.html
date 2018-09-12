@@ -19,6 +19,14 @@
                     Like <span class="badge badge-primary badge-pill">14</span>
                     Dislike <i class="fa fa-thumbs-down" ></i> <span class="badge badge-primary badge-pill">14</span>
                 </a>
+
+                <a href="#" class="list-group-item list-group-item-action">
+                    {% if comments %}
+                        {{ wtf.quick_form(form_comment)  }}
+                    {% else %}
+
+                    {% endif %}
+                </a>
             </div>
     </div>
 
@@ -30,7 +38,7 @@
             {% for proposal in proposals %}
                 <div class="list-group">
                     <a href="#" class="list-group-item list-group-item-action active">
-                    
+                        Proposal by : {{ proposal.user }}
                     </a>
                     <a class="list-group-item list-group-item-action">
                         pro 
@@ -38,6 +46,13 @@
                     <a href="#" class="list-group-item list-group-item-action disabled">
                         Like <span class="badge badge-primary badge-pill">14</span>
                         Dislike <i class="fa fa-thumbs-down" ></i> <span class="badge badge-primary badge-pill">14</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        {% if comments %}
+                            {{ wtf.quick_form(form_comment)  }}
+                        {% else %}
+                            
+                        {% endif %}
                     </a>
                 </div>
             {% endfor %}
