@@ -58,6 +58,7 @@ class Pitch(db.Model):
         pitches = Pitch.query.filter_by(category_id = category).all()
 
         return pitches
+    
 
 
 # class Category(db.Model):

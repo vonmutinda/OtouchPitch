@@ -1,22 +1,33 @@
-from flask import render_template , request , redirect , url_for , abort
+from flask import render_template , request , redirect , url_for , abort , flash
 from . import main 
 
 from flask_login import login_required , current_user
-from .forms import PitchForm , UpdateProfile
+from .forms import PitchForm , UpdateProfile ,PostForm
 from ..models import Pitch , User
 from .. import db , photos
 
 '''
 This routing function fires moment the app loads. 
 '''
-@main.route('/')
+@main.route('/' ,methods=["GET","POST"])
 def index():
 
-    # proposal = Pitch.get_pitches('proposal')
-    # openers = Pitch.get_pitches('openers')
-    # about = Pitch.get_pitches('about')
+    proposal = Pitch.query.filter_by(category = 'Marriage Proposal').all()
+    openers = Pitch.query.filter_by(category = 'About You').all()
+    about = Pitch.query.filter_by(category = 'About You').all()
+    form = PostForm()
+    if form.validate_on_submit():
+        post = Pitch(body=form.pitch.data, author=current_user, category=form.category.data)
+        # db.session.add(post)
+        # db.session.commit()
+        flash('Your pitch has been posted!')
 
-    return render_template('index.html')
+        return redirect(url_for('main.index'))
+
+    # posts = Pitch.retrieve_posts(id).all()
+
+
+    return render_template('index.html',form=form , proposals = proposal ,  openers = openers , about = about )
 
 
 
@@ -25,7 +36,7 @@ This route will navigate to marriage proposal pitches only .
 
 Will query the database for pitches from proposal category then pass them to macro for looping
 '''
-@main.route('/pitches/proposal')
+@main.route('/pitches/proposal',methods=["GET","POST"])
 def proposal():
 
     # pitches = Pitch.get_pitches(proposal)

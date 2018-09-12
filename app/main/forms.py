@@ -13,7 +13,7 @@ class UpdateProfile(FlaskForm):
 
 
 class PostForm(FlaskForm):
-    pitch = TextAreaField(('Say something'), validators=[DataRequired()])
+    pitch = TextAreaField(("What's on your mind ?"), validators=[DataRequired()])
     category = SelectField('Category', choices=[('Pickup Lines','Pickup Lines'),('About You','About You'),('Marriage Proposal','Marrage Proposal')])
 
     submit = SubmitField(('Submit'))

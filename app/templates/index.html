@@ -4,6 +4,7 @@
 
 {% block body %}
 <div class="container-fluid">
+    {{ wtf.quick_form(form)  }}
 <hr>
     <!-- marriage pitches -->
     <div class="row">
@@ -20,5 +21,50 @@
                 </a>
             </div>
     </div>
+
+    {% if proposals %}
+        <div class="row">
+            <h2>Marriage Proposal Lines</h2>
+            <hr>
+
+            {% for proposal in proposals %}
+                <div class="list-group">
+                    <a href="#" class="list-group-item list-group-item-action active">
+                    
+                    </a>
+                    <a class="list-group-item list-group-item-action">
+                        pro 
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action disabled">
+                        Like <span class="badge badge-primary badge-pill">14</span>
+                        Dislike <i class="fa fa-thumbs-down" ></i> <span class="badge badge-primary badge-pill">14</span>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if about %}
+    <div class="row">
+        <h2>Describe Yourself Lines</h2>
+        <hr>
+
+        {% for item in about %}
+            <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action active">
+                About Myself
+                </a>
+                <a class="list-group-item list-group-item-action">
+                    {{item.pitch}}
+                </a>
+                <a href="#" class="list-group-item list-group-item-action disabled">
+                    Like <span class="badge badge-primary badge-pill">  </span>
+                    Dislike <i class="fa fa-thumbs-down" ></i> <span class="badge badge-primary badge-pill">14</span>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
 </div>
 {% endblock %}
