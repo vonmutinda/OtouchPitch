@@ -42,10 +42,11 @@ class Pitch(db.Model):
     pitch = db.Column(db.String)
     posted = db.Column(db.DateTime,default=datetime.utcnow)
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
-    category_id = db.Column(db.String)
+    # category_id = db.Column(db.String)
+    category = db.Column(db.String(140))
   
     reaction = db.relationship('Reaction',backref = 'pitch',lazy = "dynamic")
-    comments = db.relationship('Comment',backref = 'pitch',lazy = "dynamic")
+    # comments = db.relationship('Comment',backref = 'pitch',lazy = "dynamic")
     
 
     def save_pitch(self):
@@ -59,17 +60,17 @@ class Pitch(db.Model):
         return pitches
 
 
-class Category(db.Model):
+# class Category(db.Model):
     
-    __tablename__ = 'categories'
+#     __tablename__ = 'categories'
 
-    id = db.Column (db.Integer , primary_key = True)
-    cat = db.Column (db.String)
+#     id = db.Column (db.Integer , primary_key = True)
+#     cat = db.Column (db.String)
 
 
-    def save_cat(self):
-        db.session.add(self)
-        db.session.commit()
+#     def save_cat(self):
+#         db.session.add(self)
+#         db.session.commit()
 
 
 class Reaction (db.Model):

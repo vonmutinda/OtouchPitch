@@ -7,7 +7,7 @@ from flask_mail import Mail
 from flask_simplemde import SimpleMDE
 
 
-from config import config_options
+from config import config_options , Config
 
 # **** instantiate extensions ****
 bootstrap = Bootstrap()
@@ -27,10 +27,10 @@ def create_app(config_name):
     # *** app configurations *** #
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
     app.config.from_object(config_options[config_name])
-
+    app.config.from_object(Config)
 
     # *** Init app extensions *** #
-    # configure_uploads(app,photos)
+    configure_uploads(app,photos)
     bootstrap.init_app(app)
     db.init_app(app)
     login_manager.init_app(app)
@@ -47,7 +47,6 @@ def create_app(config_name):
     app.register_blueprint(auth_blueprint,url_prefix='/authenticate') 
 
     app.config['SECRET_KEY'] =  'bxxfcxa43xf7xd9xc6xefxf8c'
-    app.config['UPLOADED_PHOTOS_DEST'] = 'app/static/photos'
 
 
     return app
