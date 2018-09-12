@@ -4,6 +4,7 @@ from . import main
 from flask_login import login_required , current_user
 from .forms import PitchForm , UpdateProfile
 from ..models import Pitch , Category , User
+from .. import db , photos
 
 '''
 This routing function fires moment the app loads. 
@@ -27,7 +28,10 @@ Will query the database for pitches from proposal category then pass them to mac
 @main.route('/pitches/proposal')
 def proposal():
 
-    return render_template('pitches.html')
+    # pitches = Pitch.get_pitches(proposal)
+    pitches = Pitch.query.filter_by(category = 'proposal').all()
+    title = 'Marriage Proposal'
+    return render_template('pitches.html', title = title , pitches = pitches )
 
 
 '''
@@ -36,8 +40,10 @@ A route for pick-up lines page
 @main.route('/pitch/pick-up')
 def pick_up():
 
-
-    return render_template('pitches.html')
+    # pitches = Pitch.get_pitches(pick_up)
+    pitches = Pitch.query.filter_by(category = 'about-you').all()
+    title = 'Pickup Lines'
+    return render_template('pitches.html', title = title , pitches = pitches)
 
 
 '''
@@ -46,8 +52,9 @@ A route for pitches of how to best describe yourself in only a minute .
 @main.route('/pitch/describe-yourself')
 def about_you():
 
-
-    return render_template('pitches.html')
+    pitches = Pitch.query.filter_by(category = 'about-you').all()
+    title = 'About yourself'
+    return render_template('pitches.html', title = title , pitches = pitches)
 
 
 '''
@@ -118,17 +125,16 @@ def update_profile(username):
         db.session.add(user)
         db.session.commit()
 
-        return redirect(url_for('.profile',username=user.username))
+        return redirect(url_for('.profile', username=user.username))
 
     return render_template("profile/update_profile.html", form = form)
 
+
 '''
 A routing function for uploading profile pictures into our app .
-
--- i feel good about myself now that i'm using docstrings ..
 '''
 
-@main.route('/profile/<username>/upload/pic',methods =["POST"])
+@main.route('/profile/<username>/pic/upload',methods =["POST"])
 @login_required
 def profile_pic(username):
 

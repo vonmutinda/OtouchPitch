@@ -1,19 +1,20 @@
 
 
-{% macro displayReviews(review_list) %}
-    {% for review in review_list %}
+{% macro displayPitches(pitches) %}
+    {% for pitch in pitches %}
         
         <div class="list-group">
             <a href="#" class="list-group-item list-group-item-action active col-md-3">
-                    {{ pitch.title}}
+                    {{title}}
             </a> 
             <a href="#" class="list-group-item list-group-item-action">
-                    {{ pitch.body}}
+                    {{ pitch.pich}}
             </a>
             <a href="#" class="list-group-item list-group-item-action disabled">
                 Like <i class="fa fa-thumbs-up"></i> <span class="badge badge-primary badge-pill">{{pitch.likes}}</span>
                 Dislike <i class="fa fa-thumbs-down" ></i> <span class="badge badge-primary badge-pill">{{pitch.dislikes}}</span>
             </a>
+
         </div>
         
     {% endfor %}

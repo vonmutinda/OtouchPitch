@@ -1,6 +1,13 @@
 {% extends 'base.html' %}
 
 {% block body %}
+    
+    <div class="container">
+        {% if pitches %}
+            {{ displayPitches(pitch) }}
+        {% else %}
+            <h2> No Pitches user this category </h2>
+        {% endif %}
+    </div>
 
-    <!-- here from database is where pitches gonna land -->
 {% endblock %}
