@@ -12,23 +12,19 @@ This routing function fires moment the app loads.
 @main.route('/' ,methods=["GET","POST"])
 def index():
 
-    proposal = Pitch.query.filter_by(category = 'Marriage Proposal').all()
-    openers = Pitch.query.filter_by(category = 'About You').all()
-    about = Pitch.query.filter_by(category = 'About You').all()
-    form = PostForm()
-    if form.validate_on_submit():
-        post = Pitch(pitch=form.pitch.data, author=current_user, category=form.category.data)
-        # db.session.add(post)
-        # db.session.commit()
-        flash('Your pitch has been posted!')
+    # form = PostForm()
+    # author = current_user
 
-        return redirect(url_for('main.index'))
+    # if form.validate_on_submit():
+    #     post = Pitch(pitch=form.pitch.data, author=author, category=form.category.data)
 
-    # posts = Pitch.retrieve_posts(id).all()
+    #     Pitch.save_pitch(post)
+    #     flash('Your pitch has been posted!')
+
+    #     # return redirect(url_for('.index'))
 
 
-    return render_template('index.html',form=form , proposals = proposal ,  openers = openers , about = about )
-
+    return render_template('index.html')
 
 
 '''
@@ -37,11 +33,23 @@ This route will navigate to marriage proposal pitches only .
 Will query the database for pitches from proposal category then pass them to macro for looping
 '''
 @main.route('/pitches/proposal',methods=["GET","POST"])
+@login_required
 def proposal():
 
-    # pitches = Pitch.get_pitches(proposal)
+    form = PostForm()
+    author = current_user
+
+    if form.validate_on_submit():
+        post = Pitch(pitch=form.pitch.data, author=author, category=form.category.data)
+
+        Pitch.save_pitch(post)
+        flash('Your pitch has been posted!')
+
+        return redirect(url_for('.index'))
+
     pitches = Pitch.query.filter_by(category = 'proposal').all()
     title = 'Marriage Proposal'
+
     return render_template('pitches.html', title = title , pitches = pitches )
 
 
@@ -49,18 +57,30 @@ def proposal():
 A route for pick-up lines page 
 '''
 @main.route('/pitch/pick-up')
+@login_required
 def pick_up():
 
-    # pitches = Pitch.get_pitches(pick_up)
+    form = PostForm()
+    author = current_user
+
+    if form.validate_on_submit():
+        post = Pitch(pitch=form.pitch.data, author=author, category=form.category.data)
+
+        Pitch.save_pitch(post)
+        flash('Your pitch has been posted!')
+
+        return redirect(url_for('.index'))
+
     pitches = Pitch.query.filter_by(category = 'about-you').all()
     title = 'Pickup Lines'
-    return render_template('pitches.html', title = title , pitches = pitches)
+    return render_template('pitches.html', title = title , pitches = pitches ,form=form )
 
 
 '''
 A route for pitches of how to best describe yourself in only a minute . 
 '''
 @main.route('/pitch/describe-yourself')
+@login_required
 def about_you():
 
     pitches = Pitch.query.filter_by(category = 'about-you').all()

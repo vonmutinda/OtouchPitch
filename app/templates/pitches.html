@@ -1,13 +1,15 @@
 {% extends 'base.html' %}
-
+{% import 'macro.html' as macro %}
 {% block body %}
     
     <div class="container">
+
         {% if pitches %}
-            {{ displayPitches(pitch) }}
+            {{ macro.displayPitches(pitches) }}
         {% else %}
             <h2> No Pitches user this category </h2>
         {% endif %}
+
     </div>
 
 {% endblock %}

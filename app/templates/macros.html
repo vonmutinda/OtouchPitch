@@ -1,22 +1,26 @@
 
 
-{% macro displayPitches(pitches) %}
-    {% for pitch in pitches %}
-        
+{% macro displayPitches(list_items) %}
+    {% for item in list_items %}
         <div class="list-group">
-            <a href="#" class="list-group-item list-group-item-action active col-md-3">
-                    {{title}}
-            </a> 
-            <a href="#" class="list-group-item list-group-item-action">
-                    {{ pitch.pich}}
+            <a href="#" class="list-group-item list-group-item-action active">
+                by : {{ item.user }}
+            </a>
+            <a class="list-group-item list-group-item-action">
+                {{item.pitch}} 
             </a>
             <a href="#" class="list-group-item list-group-item-action disabled">
-                Like <i class="fa fa-thumbs-up"></i> <span class="badge badge-primary badge-pill">{{pitch.likes}}</span>
-                Dislike <i class="fa fa-thumbs-down" ></i> <span class="badge badge-primary badge-pill">{{pitch.dislikes}}</span>
+                Like <span class="badge badge-primary badge-pill">14</span>
+                Dislike <i class="fa fa-thumbs-down" ></i> <span class="badge badge-primary badge-pill">14</span>
             </a>
-
+            <a href="#" class="list-group-item list-group-item-action">
+                {% if comments %}
+                    {{ wtf.quick_form(form_comment)  }}
+                {% else %}
+                    
+                {% endif %}
+            </a>
         </div>
-        
     {% endfor %}
 {% endmacro %}
 

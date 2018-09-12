@@ -40,13 +40,12 @@ class Pitch(db.Model):
     __tablename__ = 'pitches'
     id = db.Column(db.Integer,primary_key = True)
     pitch = db.Column(db.String)
-    posted = db.Column(db.DateTime,default=datetime.utcnow)
+    posted = db.Column(db.DateTime,index=True,default=datetime.utcnow)
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
     author = db.Column(db.String(100))
 
     category = db.Column(db.String(140))
   
-    reaction = db.relationship('Reaction',backref = 'pitch',lazy = "dynamic")
     
 
     def save_pitch(self):
@@ -54,10 +53,11 @@ class Pitch(db.Model):
         db.session.commit()
 
     @classmethod
-    def get_pitches(cls,category):
-        pitches = Pitch.query.filter_by(category_id = category).all()
+    def get_pitches(cls,id):
+        pitches = Pitch.query.filter_by(id = id).all()
 
         return pitches
+
     
 
 
