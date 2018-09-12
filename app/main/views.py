@@ -15,15 +15,16 @@ def index():
     form = PostForm()
     form_comment = CommentForm()
 
-    author = current_user
+    # author = current_user
 
     if form.validate_on_submit():
-        post = Pitch(pitch=form.pitch.data,user_id = current_user.id, author=author, category=form.category.data)
+        author = current_user
+        form = Pitch(pitch=form.pitch.data, category=form.category.data)
 
-        post.save_pitch()
+        form.save_pitch()
         flash('Your pitch has been posted!')
 
-        # return redirect(url_for('.index'))
+        return redirect(url_for('.index'))
 
 
     return render_template('index.html',form = form , form_comment = form_comment)
@@ -37,10 +38,10 @@ Will query the database for pitches from proposal category then pass them to mac
 @main.route('/pitches/proposal',methods=["GET","POST"])
 @login_required
 def proposal(): 
-    
+    pitches = Pitch.query.filter_by(category = 'Marriage Proposal').all()
     title = 'Marriage Proposal'
 
-    return render_template('pitches.html', title = title )
+    return render_template('pitches.html', title = title ,pitches = pitches )
 
 
 '''
@@ -52,7 +53,7 @@ def pick_up():
 
     pitches = Pitch.query.filter_by(category = 'Pickup Lines').all()
     title = 'Pickup Lines'
-    return render_template('pitches.html', title = title)
+    return render_template('pitches.html', title = title,pitches = pitches )
 
 
 '''
@@ -65,7 +66,7 @@ def about_you():
     pitches = Pitch.query.filter_by(category = 'About You').all()
 
     title = 'About yourself'
-    return render_template('pitches.html', title = title )
+    return render_template('pitches.html', title = title , pitches = pitches )
 
 
 

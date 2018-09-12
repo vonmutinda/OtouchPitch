@@ -1,10 +1,10 @@
-
+{% import 'bootstrap/wtf.html' as wtf %}
 
 {% macro displayPitches(list_items) %}
     {% for item in list_items %}
         <div class="list-group">
             <a href="#" class="list-group-item list-group-item-action active">
-                by : {{ item.user }}
+                by : {{ item.author }}
             </a>
             <a class="list-group-item list-group-item-action">
                 {{item.pitch}} 

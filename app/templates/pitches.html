@@ -4,9 +4,8 @@
 {% block body %}
     
     <div class="container">
-            {{ wtf.quick_form(form)  }}
             <hr>
-            
+
         {% if pitches %}
             {{ macro.displayPitches(pitches) }}
         {% else %}

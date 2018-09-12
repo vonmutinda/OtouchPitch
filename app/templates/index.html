@@ -4,8 +4,8 @@
 
 {% block body %}
 <div class="container-fluid">
-    <!-- {{ wtf.quick_form(form)  }}
-<hr> -->
+    {{ wtf.quick_form(form)  }}
+<hr>
     <!-- marriage pitches -->
     <div class="row">
             <div class="list-group">
@@ -29,62 +29,28 @@
                 </a>
             </div>
     </div>
-
+     <!-- the following lines of code will populate all pitches related to marriage proposals on the index -->
     {% if proposals %}
         <div class="row">
             <h2>Marriage Proposal Lines</h2>
             <hr>
-
-            {% for proposal in proposals %}
-                <div class="list-group">
-                    <a href="#" class="list-group-item list-group-item-action active">
-                        Proposal by : {{ proposal.user }}
-                    </a>
-                    <a class="list-group-item list-group-item-action">
-                        pro 
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action disabled">
-                        Like <span class="badge badge-primary badge-pill">14</span>
-                        Dislike <i class="fa fa-thumbs-down" ></i> <span class="badge badge-primary badge-pill">14</span>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action">
-                        {% if comments %}
-                            {{ wtf.quick_form(form_comment)  }}
-                        {% else %}
-                            
-                        {% endif %}
-                    </a>
-                </div>
-            {% endfor %}
+            {{ macro.displayPitches(proposal) }}
         </div>
     {% else %}
         <h2>No proposals yet</h2>
     {% endif %}
     
-
+    <!-- the following lines of code will populate all pitches related to describing you on the index -->
     {% if about %}
     <div class="row">
         <h2>Describe Yourself Lines</h2>
         <hr>
-
-        {% for item in about %}
-            <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-action active">
-                About Myself
-                </a>
-                    <a class="list-group-item list-group-item-action">
-                        {{item.pitch}}
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action disabled">
-                        Like <span class="badge badge-primary badge-pill">  </span>
-                        Dislike <i class="fa fa-thumbs-down" ></i> <span class="badge badge-primary badge-pill">14</span>
-                    </a>
-                </div>
-        {% endfor %}
         </div>
     {% else %}
         <h2>No About yet</h2>
     {% endif %}
+
+
 
 </div>
 {% endblock %}

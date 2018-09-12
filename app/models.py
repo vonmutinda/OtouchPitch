@@ -44,8 +44,7 @@ class Pitch(db.Model):
     posted = db.Column(db.DateTime,index=True,default=datetime.utcnow)
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
     author = db.Column(db.String(100))
-
-    category = db.Column(db.String(140))
+    category = db.Column(db.String)
   
     
 
