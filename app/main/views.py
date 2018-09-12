@@ -3,7 +3,7 @@ from . import main
 
 from flask_login import login_required , current_user
 from .forms import PitchForm , UpdateProfile
-from ..models import Pitch , Category , User
+from ..models import Pitch , User
 from .. import db , photos
 
 '''
@@ -64,7 +64,7 @@ saving  pitchest to their respective categories .
 @main.route('/pitch/new-pitch')
 @login_required
 def save_pitch():
-    category = request.get.args('category')
+    # category = request.get.args('category')
 
     form = PitchForm()
 
@@ -72,10 +72,10 @@ def save_pitch():
         pitch = form.pitch.data
 
         new_pitch = Pitch(pitch_id=pitch.id, pitch = pitch.pitch,  user=current_user)
-        new_category = Category (cat = category)
+        # new_category = Category (cat = category)
 
         new_pitch.save_pitch()
-        new_category.save_cat()
+        # new_category.save_cat()
         return redirect(url_for('.index'))
 
     # title = f'{pitch.category} pitch'
@@ -109,7 +109,7 @@ def profile(username):
 A route to take you to edit user's profile 
 '''
 
-@main.route('/user/<username>/update',methods = ["POST"])
+@main.route('/user/<username>/update', methods = ["POST","GET"])
 @login_required
 def update_profile(username):
     user = User.query.filter_by(username = username).first()

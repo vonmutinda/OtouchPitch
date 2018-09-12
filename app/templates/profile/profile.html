@@ -13,19 +13,20 @@
             {% endif %}
 
           <h3> {{user.username| capitalize}} </h3>
+          <img src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-thumbnail">
 
           <!--Displaying user bio-->
           {% if user.bio %}
             <p> {{user.bio}}</p>
           {% else %}
-            <p> {{user.username| capitalize}} has no bio </p>
+            <p> {{user.username}} has no bio </p>
           {% endif %}
       </div>
 
       <!--Display profile photo-->
       <div class="col-md-4">
         {% if user.profile_pic_path %}
-          <img src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-thumbnail">
+          <!-- <img src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-thumbnail"> -->
 
         {% else %}
           <p>No profile picture</p>
