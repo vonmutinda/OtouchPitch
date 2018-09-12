@@ -12,19 +12,21 @@ This routing function fires moment the app loads.
 @main.route('/' ,methods=["GET","POST"])
 def index():
 
-    # form = PostForm()
-    # author = current_user
+    form = PostForm()
+    form_comment = CommentForm()
 
-    # if form.validate_on_submit():
-    #     post = Pitch(pitch=form.pitch.data, author=author, category=form.category.data)
+    author = current_user
 
-    #     Pitch.save_pitch(post)
-    #     flash('Your pitch has been posted!')
+    if form.validate_on_submit():
+        post = Pitch(pitch=form.pitch.data,user_id = current_user.id, author=author, category=form.category.data)
 
-    #     # return redirect(url_for('.index'))
+        post.save_pitch()
+        flash('Your pitch has been posted!')
+
+        # return redirect(url_for('.index'))
 
 
-    return render_template('index.html')
+    return render_template('index.html',form = form , form_comment = form_comment)
 
 
 '''
@@ -34,92 +36,36 @@ Will query the database for pitches from proposal category then pass them to mac
 '''
 @main.route('/pitches/proposal',methods=["GET","POST"])
 @login_required
-def proposal():
-
-    form = PostForm()
-    author = current_user
-
-    if form.validate_on_submit():
-        post = Pitch(pitch=form.pitch.data, author=author, category=form.category.data)
-
-        Pitch.save_pitch(post)
-        flash('Your pitch has been posted!')
-
-        return redirect(url_for('.index'))
-
-    pitches = Pitch.query.filter_by(category = 'proposal').all()
+def proposal(): 
+    
     title = 'Marriage Proposal'
 
-    return render_template('pitches.html', title = title , pitches = pitches )
+    return render_template('pitches.html', title = title )
 
 
 '''
 A route for pick-up lines page 
 '''
-@main.route('/pitch/pick-up')
+@main.route('/pitch/pick-up',methods=["GET","POST"])
 @login_required
 def pick_up():
 
-    form = PostForm()
-    author = current_user
-
-    if form.validate_on_submit():
-        post = Pitch(pitch=form.pitch.data, author=author, category=form.category.data)
-
-        Pitch.save_pitch(post)
-        flash('Your pitch has been posted!')
-
-        return redirect(url_for('.index'))
-
-    pitches = Pitch.query.filter_by(category = 'about-you').all()
+    pitches = Pitch.query.filter_by(category = 'Pickup Lines').all()
     title = 'Pickup Lines'
-    return render_template('pitches.html', title = title , pitches = pitches ,form=form )
+    return render_template('pitches.html', title = title)
 
 
 '''
 A route for pitches of how to best describe yourself in only a minute . 
 '''
-@main.route('/pitch/describe-yourself')
+@main.route('/pitch/describe-yourself',methods=["GET","POST"])
 @login_required
 def about_you():
 
-    pitches = Pitch.query.filter_by(category = 'about-you').all()
+    pitches = Pitch.query.filter_by(category = 'About You').all()
+
     title = 'About yourself'
-    return render_template('pitches.html', title = title , pitches = pitches)
-
-
-'''
-saving  pitchest to their respective categories . 
-'''
-
-@main.route('/pitch/new-pitch')
-@login_required
-def save_pitch():
-    # category = request.get.args('category')
-
-    form = PitchForm()
-
-    if form.validate_on_submit():
-        pitch = form.pitch.data
-
-        new_pitch = Pitch(pitch_id=pitch.id, pitch = pitch.pitch,  user=current_user)
-        # new_category = Category (cat = category)
-
-        new_pitch.save_pitch()
-        # new_category.save_cat()
-        return redirect(url_for('.index'))
-
-    # title = f'{pitch.category} pitch'
-    return render_template('pitches.html')
-
-
-
-'''
-There also could be a route that receives pitches categories as a parameter then
-
-fires a search method in class Pitches and returns appropriate data from db .
-'''
-
+    return render_template('pitches.html', title = title )
 
 
 

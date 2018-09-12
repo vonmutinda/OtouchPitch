@@ -38,6 +38,7 @@ def load_user(user_id):
 
 class Pitch(db.Model):
     __tablename__ = 'pitches'
+    
     id = db.Column(db.Integer,primary_key = True)
     pitch = db.Column(db.String)
     posted = db.Column(db.DateTime,index=True,default=datetime.utcnow)
