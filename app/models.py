@@ -42,11 +42,10 @@ class Pitch(db.Model):
     pitch = db.Column(db.String)
     posted = db.Column(db.DateTime,default=datetime.utcnow)
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
-    # category_id = db.Column(db.String)
+
     category = db.Column(db.String(140))
   
     reaction = db.relationship('Reaction',backref = 'pitch',lazy = "dynamic")
-    # comments = db.relationship('Comment',backref = 'pitch',lazy = "dynamic")
     
 
     def save_pitch(self):

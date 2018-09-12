@@ -2,7 +2,7 @@ from flask import render_template , request , redirect , url_for , abort , flash
 from . import main 
 
 from flask_login import login_required , current_user
-from .forms import PitchForm , UpdateProfile ,PostForm
+from .forms import PitchForm , UpdateProfile ,PostForm , CommentForm
 from ..models import Pitch , User
 from .. import db , photos
 
@@ -157,4 +157,21 @@ def profile_pic(username):
         user.profile_pic_path = path
         db.session.commit()
     return redirect(url_for("main.profile",username=username))
-    
+
+
+@main.route('/comments/<int:id>', methods = ['GET','POST'])
+@login_required
+def new_comment(id):
+    comment = Comments.query.filter_by(pitch_id=id).all()
+
+    form_comment = CommentForm()
+    if form_comment.validate_on_submit():
+        details = form_comment.details.data
+        user = current_user
+
+        new_comment = Comments(details = details,pitch_id=id,user =user)
+        # # save comment
+        db.session.add(new_comment)
+        db.session.commit()
+
+    return render_template('pickuplines.html',form_comment = form_comment,comment=comment,uname = user.username)
