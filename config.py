@@ -17,10 +17,10 @@ class Config():
     SIMPLEMDE_USE_CDN = True
 
 class ProdConfig(Config):
-    pass
+    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
 
 class DevConfig():
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://mutinda:von12@localhost/otouch'
+    # SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://mutinda:von12@localhost/otouch'
     DEBUG = True
 
 config_options = {
