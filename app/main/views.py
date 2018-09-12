@@ -10,15 +10,19 @@ from .. import db , photos
 This routing function fires moment the app loads. 
 '''
 @main.route('/' ,methods=["GET","POST"])
+@login_required
 def index():
 
     form = PostForm()
     form_comment = CommentForm()
 
+    pickup = Pitch.query.filter_by(category = "Pickup Lines").all()
+    about = Pitch.query.filter_by(category = "About You").all()
+    marryme = Pitch.query.filter_by(category = "Marriage Proposal").all()
+
     # author = current_user
 
     if form.validate_on_submit():
-        author = current_user
         form = Pitch(pitch=form.pitch.data, category=form.category.data)
 
         form.save_pitch()
@@ -27,7 +31,7 @@ def index():
         return redirect(url_for('.index'))
 
 
-    return render_template('index.html',form = form , form_comment = form_comment)
+    return render_template('index.html',form = form ,form_comment = form_comment , pickup = pickup,about=about,marryme=marryme)
 
 
 '''

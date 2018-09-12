@@ -4,14 +4,17 @@
 {% block body %}
     
     <div class="container">
-            <hr>
+        <hr>
+        <h2 class="card-header" > {{ title }} </h2>
+        <hr>
+        <div class="row">
+            {% if pitches %}
+                {{ macro.displayPitches(pitches) }}
+            {% else %}
+                <h2> No Pitches user this category </h2>
+            {% endif %}
 
-        {% if pitches %}
-            {{ macro.displayPitches(pitches) }}
-        {% else %}
-            <h2> No Pitches user this category </h2>
-        {% endif %}
-
+        </div>
     </div>
 
 {% endblock %}

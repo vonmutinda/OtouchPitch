@@ -2,7 +2,7 @@
 
 {% macro displayPitches(list_items) %}
     {% for item in list_items %}
-        <div class="list-group">
+        <div class="list-group col-md-4">
             <a href="#" class="list-group-item list-group-item-action active">
                 by : {{ item.author }}
             </a>
@@ -14,11 +14,12 @@
                 Dislike <i class="fa fa-thumbs-down" ></i> <span class="badge badge-primary badge-pill">14</span>
             </a>
             <a href="#" class="list-group-item list-group-item-action">
-                {% if comments %}
+                <!-- {% if comments %}
                     {{ wtf.quick_form(form_comment)  }}
                 {% else %}
                     
-                {% endif %}
+                {% endif %} -->
+                date posted :{{ item.posted}}
             </a>
         </div>
     {% endfor %}
