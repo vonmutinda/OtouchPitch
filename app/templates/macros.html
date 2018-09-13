@@ -4,22 +4,18 @@
     {% for item in list_items %}
         <div class="list-group col-md-4">
             <a href="#" class="list-group-item list-group-item-action active">
-                by : {{ item.author }}
+                {{item.category}} by : {{ item.user.username }}
             </a>
             <a class="list-group-item list-group-item-action">
                 {{item.pitch}} 
             </a>
             <a href="#" class="list-group-item list-group-item-action disabled">
-                Like <span class="badge badge-primary badge-pill">14</span>
-                Dislike <i class="fa fa-thumbs-down" ></i> <span class="badge badge-primary badge-pill">14</span>
+                Like<i class="fa fa-thumbs-up" ></i> <span class="badge badge-primary badge-pill"> {{ item.like }} </span>
+                Dislike <i class="fa fa-thumbs-down" ></i> <span class="badge badge-primary badge-pill"> {{ item.dislike }} </span>
             </a>
             <a href="#" class="list-group-item list-group-item-action">
-                <!-- {% if comments %}
-                    {{ wtf.quick_form(form_comment)  }}
-                {% else %}
-                    
-                {% endif %} -->
-                date posted :{{ item.posted}}
+                
+                date posted : {{ item.posted }}
             </a>
         </div>
     {% endfor %}

@@ -1,5 +1,7 @@
 Hello {{user.username}}
-Welcome to Watchlist
+Welcome to One Touch
 We have just seen you have signed up for our application and want to welcome you to the family. 
 
-Please enjoy the reviews of all your  favourite films.
+Please enjoy the One Touch pick up lines and feel free to share some of your own . 
+
+Thanks . 

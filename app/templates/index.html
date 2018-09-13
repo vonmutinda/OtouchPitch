@@ -4,6 +4,14 @@
 
 {% block body %}
 <div class="container">
+
+        {% for message in get_flashed_messages() %}
+            <div class="alert alert-dismissible alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong> There you go ! </strong> {{message}}
+            </div>
+      {% endfor %}
+
     {{ wtf.quick_form(form)  }}
 <hr>
 
@@ -17,7 +25,7 @@
          </div>
      {% else %}
          <hr>
-         <h2 class="card-header" >No About yet</h2>
+         <h2 class="card-header" >No proposals pitches yet</h2>
          <hr>
      {% endif %}
     <!-- the following lines of code will populate all pitches related to describing you on the index -->
@@ -43,7 +51,7 @@
         {{ macro.displayPitches(pickup)}}
         </div>
     {% else %}
-        <h2 class="card-header" >No About yet</h2>
+        <h2 class="card-header" >No pick-up lines yet</h2>
     {% endif %}
     
     

@@ -10,7 +10,6 @@ from .. import db , photos
 This routing function fires moment the app loads. 
 '''
 @main.route('/' ,methods=["GET","POST"])
-@login_required
 def index():
 
     form = PostForm()
@@ -22,10 +21,12 @@ def index():
 
     # author = current_user
 
+    # if current_user 
     if form.validate_on_submit():
-        form = Pitch(pitch=form.pitch.data, category=form.category.data)
+        form = Pitch(pitch=form.pitch.data, user=current_user, category=form.category.data)
 
         form.save_pitch()
+
         flash('Your pitch has been posted!')
 
         return redirect(url_for('.index'))

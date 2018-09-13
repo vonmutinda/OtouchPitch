@@ -14,7 +14,7 @@ class User(UserMixin , db.Model):
     bio = db.Column(db.String(255))
     profile_pic_path = db.Column(db.String())
 
-    pitches = db.relationship('Pitch',backref = 'username',lazy="dynamic")
+    pitches = db.relationship('Pitch',backref = 'user',lazy="dynamic")
     
 
     def __repr__(self):
@@ -46,7 +46,8 @@ class Pitch(db.Model):
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
     author = db.Column(db.String(100))
     category = db.Column(db.String)
-    comments = db.relationship('Pitch',backref = 'pitch',lazy="dynamic")
+    comments = db.relationship('Comment',backref = 'pitch',lazy="dynamic")
+    # reactions = db.relationship('Reaction',backref = 'reaction',lazy="dynamic")
   
     
 
