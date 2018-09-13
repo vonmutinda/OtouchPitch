@@ -19,21 +19,27 @@ def index():
     about = Pitch.query.filter_by(category = "About You").all()
     marryme = Pitch.query.filter_by(category = "Marriage Proposal").all()
 
-    # author = current_user
+    author = current_user
+    if author:
+        if form.validate_on_submit():
+            form = Pitch(pitch=form.pitch.data, user=author, category=form.category.data)
 
-    # if current_user 
-    if form.validate_on_submit():
-        form = Pitch(pitch=form.pitch.data, user=current_user, category=form.category.data)
+            form.save_pitch()
 
-        form.save_pitch()
+            flash('Your pitch has been posted!')
 
-        flash('Your pitch has been posted!')
-
-        return redirect(url_for('.index'))
+            return redirect(url_for('.index'))
 
 
+    else:
+        flash("You need to be logged in") 
+ 
     return render_template('index.html',form = form ,form_comment = form_comment , pickup = pickup,about=about,marryme=marryme)
 
+# @main.route('/posting')
+# @login_required
+# def home():
+#     return  render_template('auth/login.html')
 
 '''
 This route will navigate to marriage proposal pitches only .
@@ -117,7 +123,7 @@ def update_profile(username):
 A routing function for uploading profile pictures into our app .
 '''
 
-@main.route('/profile/<username>/pic/upload',methods =["POST"])
+@main.route('/profile/<username>/pic/upload',methods =["POST","GET"])
 @login_required
 def profile_pic(username):
 
