@@ -15,7 +15,7 @@ class User(UserMixin , db.Model):
     profile_pic_path = db.Column(db.String())
 
     pitches = db.relationship('Pitch',backref = 'username',lazy="dynamic")
-    comments = db.relationship('Pitch',backref = 'username',lazy="dynamic")
+    
 
     def __repr__(self):
         return f'User {self.username}'
