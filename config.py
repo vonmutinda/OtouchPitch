@@ -21,7 +21,7 @@ class ProdConfig(Config):
     pass
 
 class DevConfig():
-    # SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://mutinda:von12@localhost/otouch'
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://mutinda:von12@localhost/otouch'
     DEBUG = True
 
 config_options = {
