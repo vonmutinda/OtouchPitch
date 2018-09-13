@@ -16,8 +16,9 @@ class PostForm(FlaskForm):
     pitch = TextAreaField(("What's on your mind ?"), validators=[DataRequired()])
     category = SelectField('Category', choices=[('Pickup Lines','Pickup Lines'),('About You','About You'),('Marriage Proposal','Marriage Proposal')])
 
-    submit = SubmitField(('Submit'))
+    submit = SubmitField(('post'))
 
 
 class CommentForm(FlaskForm):
     comment = StringField('Write a comment',validators=[DataRequired()])
+    submit = SubmitField(('comment'))

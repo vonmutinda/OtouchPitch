@@ -3,7 +3,7 @@ from . import main
 
 from flask_login import login_required , current_user
 from .forms import PitchForm , UpdateProfile ,PostForm , CommentForm
-from ..models import Pitch , User ,Comment
+from ..models import Pitch , User ,Comment , Reaction
 from .. import db , photos
 
 '''
@@ -136,17 +136,34 @@ def profile_pic(username):
 
 @main.route('/comments/<int:id>', methods = ['GET','POST'])
 @login_required
-def new_comment(id):
-    comment = Comment.query.filter_by(pitch_id=id).all()
-    user = current_user
+def comment(id):
+    comments = Comment.query.filter_by(pitch_id=id).all()
+    the_pitch = Pitch.query.filter_by(id = id).first()
 
     form_comment = CommentForm()
-    if form_comment.validate_on_submit():
-        details = form_comment.details.data
-        user = current_user
 
-        new_comment = Comment(details = details,pitch_id=id,user =user)
+    if form_comment.validate_on_submit():
+        comment = form_comment.comment.data
+        new_comment = Comment(comment = comment,pitch_id=the_pitch.id)
         db.session.add(new_comment)
         db.session.commit()
 
-    return render_template('comments.html',form_comment = form_comment,comment=comment,uname = user.username)
+        # return redirect(url_for('.comment'))
+    return render_template('comments.html',comments= comments,pitch = the_pitch,form_comment = form_comment)
+
+
+'''
+Whenever a like button is clicked on the app , this method is gonna run . takes id of the pitch and 
+will add 1 whenever clicked . 
+'''
+@main.route('/liked/<int:id>')
+def like(id):
+
+
+    # # reaction = Reaction.query.filter_by(id=id).update({{"like":"1"}})
+    # reation = Reaction.query.filter_by(id=id).first()
+
+    # db.session.add(reaction)
+    # db.session.commit()
+
+    return render_template('index.html')

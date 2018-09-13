@@ -10,12 +10,18 @@
                 {{item.pitch}} 
             </a>
             <a href="#" class="list-group-item list-group-item-action disabled">
-                Like<i class="fa fa-thumbs-up" ></i> <span class="badge badge-primary badge-pill"> {{ item.like }} </span>
-                Dislike <i class="fa fa-thumbs-down" ></i> <span class="badge badge-primary badge-pill"> {{ item.dislike }} </span>
+                Like <i class="fa fa-thumbs-up" ></i>
+                 <span class="badge badge-primary badge-pill"> {{ item.like }} </span>
+                Dislike  <i class="fa fa-thumbs-down" ></i>  
+                <span class="badge badge-primary badge-pill"> {{ item.dislike }} </span>
+                <!-- <a href="{{url_for('main.like',id = item.id) }}"></a> -->
             </a>
             <a href="#" class="list-group-item list-group-item-action">
                 
                 date posted : {{ item.posted }}
+            </a>
+                <a class="list-group-item list-group-item-action" href="{{ url_for('main.comment',id = item.id ) }}">
+                    write comment
             </a>
         </div>
     {% endfor %}
