@@ -19,20 +19,18 @@ def index():
     about = Pitch.query.filter_by(category = "About You").all()
     marryme = Pitch.query.filter_by(category = "Marriage Proposal").all()
 
-    author = current_user
-    if author:
-        if form.validate_on_submit():
-            form = Pitch(pitch=form.pitch.data, user=author, category=form.category.data)
+ 
+    if form.validate_on_submit():
+        form = Pitch(pitch=form.pitch.data, user=current_user, category=form.category.data)
 
-            form.save_pitch()
+        form.save_pitch()
 
-            flash('Your pitch has been posted!')
+        flash('Your pitch has been posted!')
 
-            return redirect(url_for('.index'))
+        return redirect(url_for('.index'))
 
 
-    else:
-        flash("You need to be logged in") 
+    # flash("You need to be logged in") 
  
     return render_template('index.html',form = form ,form_comment = form_comment , pickup = pickup,about=about,marryme=marryme)
 
