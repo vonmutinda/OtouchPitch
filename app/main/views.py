@@ -84,6 +84,7 @@ def about_you():
 A route to redirect you to a user's profile
 '''
 @main.route('/user/<username>')
+@login_required
 def profile(username):
     user = User.query.filter_by(username = username).first()
 
@@ -97,7 +98,6 @@ A route to take you to edit user's profile
 '''
 
 @main.route('/user/<username>/update', methods = ["POST","GET"])
-@login_required
 def update_profile(username):
     user = User.query.filter_by(username = username).first()
 
@@ -122,7 +122,6 @@ A routing function for uploading profile pictures into our app .
 '''
 
 @main.route('/profile/<username>/pic/upload',methods =["POST","GET"])
-@login_required
 def profile_pic(username):
 
     user = User.query.filter_by(username = username).first()
