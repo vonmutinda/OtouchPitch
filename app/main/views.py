@@ -21,9 +21,9 @@ def index():
 
  
     if form.validate_on_submit():
-        form = Pitch(pitch=form.pitch.data, user=current_user, category=form.category.data)
+        pitch = Pitch(pitch=form.pitch.data, user=current_user, category=form.category.data)
 
-        form.save_pitch()
+        # pitch.save_pitch()
 
         flash('Your pitch has been posted!')
 
